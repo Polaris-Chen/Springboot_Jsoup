@@ -1,0 +1,49 @@
+spring:
+    datasource:
+     username: root
+     password: 31284679
+     url: jdbc:mysql://localhost:3306/czh?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     type: com.alibaba.druid.pool.DruidDataSource
+     druid:
+       initial-size: 5
+       min-idle: 5
+       max-active: 20
+       max-wait: 60000
+       time-between-eviction-runs-millis: 60000
+       min-evictable-idle-time-millis: 30000
+       validation-query: SELECT 1 FROM DUAL
+       test-while-idle: true
+       test-on-borrow: false
+       test-on-return: false
+       pool-prepared-statements: true
+       max-pool-prepared-statement-per-connection-size: 20
+       filters: stat,wall.log4j2
+       maxPoolPreparedStatementPerConnectionSize: 20
+       useGlobalDataSourceStat: true
+         # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+         # 配置StatFilter
+       web-stat-filter:
+           #默认为false，设置为true启动
+           enabled: true
+           url-pattern: "/*"
+           exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+         #配置StatViewServlet
+       stat-view-servlet:
+           url-pattern: "/druid/*"
+           #允许那些ip
+           allow: 127.0.0.1
+           login-username: admin
+           login-password: 123456
+           #禁止那些ip
+           deny: 192.168.1.102
+           #是否可以重置
+           reset-enable: true
+           #启用
+           enabled: true
+mybatis:
+  type-aliases-package: com.example.demo.Entity
+
+home:
+  welcome: Bienvenido a nuestra tienda de comestibles!
